@@ -475,7 +475,7 @@ function get(url, opts) {
       return type.indexOf('json') !== -1 ? res.json() : res.text()
     })
     .then(body => {
-      if (status >= 400) throw new Error(body.Message || body || status)
+      if (status >= 400) console.error(body.Message || body || status)
       return { headers: resHeaders, body: body }
     })
     .catch(err => {
