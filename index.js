@@ -188,7 +188,7 @@ function login(username, password) {
 /**
  * Retrieve information about the current state of a security system including
  * attributes, partitions, sensors, and relationships.
- * 
+ *
  * @param {string} systemID ID of the system to query. The Authentication object
  *   returned from the `login` method contains a `systems` property which is an
  *   array of system IDs.
@@ -209,8 +209,8 @@ function getCurrentState(systemID, authOpts) {
     return Promise.all([
       Promise.all(partTasks),
       getSensors(sensorIDs, authOpts),
-      getLights(lightIDs, authOpts),
-      getLocks(lockIDs, authOpts)
+      lightIDs ? getLights(lightIDs, authOpts) : null,
+      lockIDs ? getLocks(lockIDs, authOpts) : null
     ]).then(systemAccessories => {
       const [partitions, sensors, lights, locks] = systemAccessories
       return {
